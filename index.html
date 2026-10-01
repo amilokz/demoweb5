@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pivoine, peony skincare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f6dde1;
+  --end:#f0bbc0;
+  --ink:#2e1826;
+  --muted:#6d4a5b;
+  --plum:#6a3f8e;
+  --plum-dark:#4f2d72;
+  --rose:#d9628f;
+  --card:#fdf3f5;
+  --serif:"Playfair Display", "Iowan Old Style", Georgia, serif;
+  --sans:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;}
+:focus-visible{outline:2px solid var(--plum);outline-offset:3px;border-radius:999px;}
+
+header{position:fixed;left:0;right:0;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px);pointer-events:none;}
+.bar{pointer-events:auto;margin:14px auto 0;width:min(560px,calc(100% - 28px));display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 12px 9px 22px;border-radius:999px;background:rgba(253,243,245,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
+.logo{font-family:var(--serif);letter-spacing:.32em;font-size:11px;font-weight:500;}
+.links{display:flex;gap:18px;font-size:12px;color:var(--muted);}
+.links a:hover{color:var(--ink);}
+.right{display:flex;align-items:center;gap:10px;}
+.cart{position:relative;background:none;border:0;padding:4px;color:var(--ink);display:grid;place-items:center;}
+.cart .n{position:absolute;top:-4px;right:-6px;min-width:15px;height:15px;border-radius:99px;background:var(--rose);color:#fff;font-size:9px;font-weight:600;display:grid;place-items:center;padding:0 4px;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1);}
+.cart .n.on{transform:scale(1);}
+.pill{border:0;border-radius:999px;background:var(--plum);color:#fff;font-size:12px;font-weight:500;padding:8px 16px;transition:background .2s;}
+.pill:hover{background:var(--plum-dark);}
+@media (max-width:560px){.links{display:none;}}
+
+#track{position:relative;height:800vh;}
+.stage{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;background:#f0bcc3;}
+#cv{position:absolute;display:block;z-index:2;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--fl,14%)),linear-gradient(to bottom,transparent 0,#000 var(--ft,0%),#000 calc(100% - var(--fb,0%)),transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent 0,#000 var(--fl,14%)),linear-gradient(to bottom,transparent 0,#000 var(--ft,0%),#000 calc(100% - var(--fb,0%)),transparent 100%);
+  mask-composite:intersect;}
+.copy{position:absolute;left:clamp(24px,6vw,96px);top:50%;width:min(380px,36vw);height:440px;margin-top:-220px;z-index:5;}
+.chap{position:absolute;left:0;right:0;top:50%;--dy:0px;transform:translateY(calc(-50% + var(--dy)));opacity:0;pointer-events:none;}
+.chap small{display:block;font-size:11px;color:var(--muted);margin-bottom:14px;letter-spacing:.04em;}
+.chap h1,.chap h2{font-family:var(--serif);font-weight:400;margin:0 0 16px;font-size:clamp(32px,3.7vw,56px);line-height:1.08;letter-spacing:-.01em;}
+.chap h1 em,.chap h2 em{font-style:italic;color:#4a2347;}
+.chap p{margin:0 0 22px;font-size:14.5px;line-height:1.65;color:var(--muted);max-width:36ch;}
+.cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.ghost{background:none;border:0;color:var(--ink);font-size:12.5px;padding:8px 10px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(46,24,38,.35);}
+.jobs{list-style:none;margin:0;padding:0;display:grid;gap:16px;max-width:34ch;}
+.jobs li{display:grid;grid-template-columns:10px 1fr;gap:12px;align-items:start;}
+.jobs i{width:8px;height:8px;border-radius:50%;background:var(--rose);margin-top:7px;}
+.jobs b{display:block;font-weight:500;font-size:14.5px;margin-bottom:2px;}
+.jobs span{font-size:13px;line-height:1.55;color:var(--muted);}
+@media (max-width:760px){
+  .copy{left:22px;right:22px;width:auto;top:calc(76px + env(safe-area-inset-top,0px));margin-top:0;height:230px;}
+  .chap{top:0;transform:translateY(var(--dy));}
+  .chap h1,.chap h2{font-size:clamp(30px,9vw,40px);margin-bottom:10px;}
+  .chap p{font-size:13.5px;margin-bottom:14px;}
+  .jobs{gap:9px;}.jobs span{font-size:12.5px;}
+}
+
+.loader{position:absolute;inset:0;z-index:4;display:grid;place-items:center;pointer-events:none;transition:opacity .5s;}
+.loader.off{opacity:0;}
+.loader span{width:120px;height:2px;background:rgba(46,24,38,.15);border-radius:2px;overflow:hidden;display:block;}
+.loader i{display:block;height:100%;width:0;background:var(--plum);}
+
+.line{position:relative;z-index:3;background:linear-gradient(180deg,var(--end),#fbeaee 40%,#fdf3f5);padding:clamp(56px,9vw,120px) clamp(20px,5vw,72px) 80px;}
+.line h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,52px);text-align:center;margin:0 0 12px;letter-spacing:-.01em;}
+.line h2 em{font-style:italic;}
+.line .sub{text-align:center;color:var(--muted);font-size:14.5px;margin:0 auto 52px;max-width:46ch;line-height:1.6;}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1120px;margin:0 auto;}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+.card{background:#fff9fa;border-radius:22px;padding:22px 18px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.card svg{width:100%;max-width:150px;height:170px;margin-bottom:12px;}
+.card h3{font-family:var(--serif);font-weight:400;font-size:19px;margin:0 0 4px;}
+.card .d{font-size:12.5px;color:var(--muted);margin:0 0 10px;}
+.card .pr{font-size:13.5px;font-weight:500;margin:0 0 14px;}
+.card .pill{margin-top:auto;}
+.card .pill.done{background:var(--rose);}
+footer{background:#fdf3f5;text-align:center;padding:30px 20px 48px;font-size:12px;color:var(--muted);}
+footer .logo{display:block;margin-bottom:8px;color:var(--ink);}
+@media (prefers-reduced-motion:reduce){.cart .n{transition:none;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="#" data-go="0" aria-label="Pivoine, top of page">PIVOINE</a>
+    <nav class="links" aria-label="Main">
+      <a href="#" data-go="0.22">The flower</a>
+      <a href="#" data-go="0.45">The jar</a>
+      <a href="#" data-go="0.66">The texture</a>
+    </nav>
+    <div class="right">
+      <button class="cart" aria-label="Bag, 0 items" id="cart">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="n" id="cartN">0</span>
+      </button>
+      <button class="pill" data-go="grid">Shop</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="track" aria-label="Pivoine story">
+  <div class="stage" id="stage">
+    <canvas id="cv" role="img" aria-label="A peony bud opening to reveal a jar of whipped cream"></canvas>
+    <div class="loader" id="loader"><span><i id="bar"></i></span></div>
+
+    <div class="copy">
+      <div class="chap" data-w="0,0,.10,.15">
+        <small>Peony skincare</small>
+        <h1>Peony,<br>at first <em>bloom.</em></h1>
+        <p>Pivoine is a whipped day cream made from fresh-pressed peony petals. All-day hydration, in one glass jar.</p>
+        <div class="cta">
+          <button class="pill" data-go="0.45">Meet the jar, $38</button>
+          <button class="ghost" data-go="grid">See the line</button>
+        </div>
+      </div>
+
+      <div class="chap" data-w=".17,.21,.30,.34">
+        <small>The flower</small>
+        <h2>Picked at dawn,<br><em>when it's fullest.</em></h2>
+        <p>We pick our peonies early in the morning, when the petals hold the most water, and press them the same day. The extract keeps everything the flower had.</p>
+      </div>
+
+      <div class="chap" data-w=".39,.43,.52,.56">
+        <small>The jar</small>
+        <h2>One jar,<br><em>three jobs.</em></h2>
+        <ul class="jobs">
+          <li><i></i><div><b>All-day hydration</b><span>Peony water holds moisture in the skin for twelve hours.</span></div></li>
+          <li><i></i><div><b>Smoother texture</b><span>A light acid from the petals softens roughness over two weeks.</span></div></li>
+          <li><i></i><div><b>Calmer tone</b><span>Redness settles and the skin looks even by evening.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="chap" data-w=".57,.61,.72,.76">
+        <small>The texture</small>
+        <h2>Whipped,<br><em>then it melts.</em></h2>
+        <p>The cream is whipped light so it sits on top of the skin, then melts at body temperature and sinks in without leaving a film.</p>
+      </div>
+
+      <div class="chap" data-w=".80,.84,2,3">
+        <h2>Four pieces,<br><em>one ritual.</em></h2>
+        <p>Cream, serum, balm and scent. Each one is made from the same morning's harvest.</p>
+        <div class="cta"><button class="pill" data-go="grid">See the line</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="line" id="grid" aria-labelledby="lineH">
+  <h2 id="lineH">Four pieces, <em>one peony.</em></h2>
+  <p class="sub">Each piece is made from the same morning's harvest and comes in recyclable glass.</p>
+  <div class="grid" id="products"></div>
+</section>
+</main>
+
+<footer>
+  <span class="logo">PIVOINE</span>
+  Small-batch peony skincare.
+</footer>
+
+<script>
+(function(){
+  var FRAMES=["frames/f_001.webp", "frames/f_002.webp", "frames/f_003.webp", "frames/f_004.webp", "frames/f_005.webp", "frames/f_006.webp", "frames/f_007.webp", "frames/f_008.webp", "frames/f_009.webp", "frames/f_010.webp", "frames/f_011.webp", "frames/f_012.webp", "frames/f_013.webp", "frames/f_014.webp", "frames/f_015.webp", "frames/f_016.webp", "frames/f_017.webp", "frames/f_018.webp", "frames/f_019.webp", "frames/f_020.webp", "frames/f_021.webp", "frames/f_022.webp", "frames/f_023.webp", "frames/f_024.webp", "frames/f_025.webp", "frames/f_026.webp", "frames/f_027.webp", "frames/f_028.webp", "frames/f_029.webp", "frames/f_030.webp", "frames/f_031.webp", "frames/f_032.webp", "frames/f_033.webp", "frames/f_034.webp", "frames/f_035.webp", "frames/f_036.webp", "frames/f_037.webp", "frames/f_038.webp", "frames/f_039.webp", "frames/f_040.webp", "frames/f_041.webp", "frames/f_042.webp", "frames/f_043.webp", "frames/f_044.webp", "frames/f_045.webp", "frames/f_046.webp", "frames/f_047.webp", "frames/f_048.webp", "frames/f_049.webp", "frames/f_050.webp", "frames/f_051.webp", "frames/f_052.webp", "frames/f_053.webp", "frames/f_054.webp", "frames/f_055.webp", "frames/f_056.webp", "frames/f_057.webp", "frames/f_058.webp", "frames/f_059.webp", "frames/f_060.webp", "frames/f_061.webp", "frames/f_062.webp", "frames/f_063.webp", "frames/f_064.webp", "frames/f_065.webp", "frames/f_066.webp", "frames/f_067.webp", "frames/f_068.webp", "frames/f_069.webp", "frames/f_070.webp", "frames/f_071.webp", "frames/f_072.webp", "frames/f_073.webp", "frames/f_074.webp", "frames/f_075.webp", "frames/f_076.webp", "frames/f_077.webp", "frames/f_078.webp", "frames/f_079.webp", "frames/f_080.webp", "frames/f_081.webp", "frames/f_082.webp", "frames/f_083.webp", "frames/f_084.webp", "frames/f_085.webp", "frames/f_086.webp", "frames/f_087.webp", "frames/f_088.webp", "frames/f_089.webp", "frames/f_090.webp", "frames/f_091.webp", "frames/f_092.webp", "frames/f_093.webp", "frames/f_094.webp", "frames/f_095.webp", "frames/f_096.webp", "frames/f_097.webp", "frames/f_098.webp", "frames/f_099.webp", "frames/f_100.webp", "frames/f_101.webp", "frames/f_102.webp", "frames/f_103.webp", "frames/f_104.webp", "frames/f_105.webp", "frames/f_106.webp", "frames/f_107.webp", "frames/f_108.webp", "frames/f_109.webp", "frames/f_110.webp", "frames/f_111.webp", "frames/f_112.webp", "frames/f_113.webp", "frames/f_114.webp", "frames/f_115.webp", "frames/f_116.webp", "frames/f_117.webp", "frames/f_118.webp", "frames/f_119.webp", "frames/f_120.webp", "frames/f_121.webp", "frames/f_122.webp", "frames/f_123.webp", "frames/f_124.webp", "frames/f_125.webp", "frames/f_126.webp", "frames/f_127.webp", "frames/f_128.webp", "frames/f_129.webp", "frames/f_130.webp", "frames/f_131.webp", "frames/f_132.webp", "frames/f_133.webp", "frames/f_134.webp", "frames/f_135.webp", "frames/f_136.webp", "frames/f_137.webp", "frames/f_138.webp", "frames/f_139.webp", "frames/f_140.webp", "frames/f_141.webp", "frames/f_142.webp", "frames/f_143.webp", "frames/f_144.webp", "frames/f_145.webp", "frames/f_146.webp", "frames/f_147.webp", "frames/f_148.webp", "frames/f_149.webp", "frames/f_150.webp", "frames/f_151.webp", "frames/f_152.webp"];
+  var LC=["#f0bcc3", "#f0bbc3", "#efbac3", "#efbac3", "#efb9c3", "#efb9c3", "#efb9c3", "#efb9c3", "#efb9c3", "#eeb9c3", "#eeb9c2", "#eeb8c2", "#eeb8c1", "#eeb8c1", "#eeb7c1", "#eeb7c1", "#eeb6c1", "#eeb6c1", "#eeb6c1", "#eeb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#eeb6c0", "#eeb6c0", "#eeb6c0", "#eeb6bf", "#eeb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb6c0", "#edb5c0", "#edb5c0", "#edb5bf", "#ecb5bf", "#ecb4be", "#ecb4be", "#ecb3be", "#ecb3bd", "#ecb3bd", "#edb3bd", "#edb3bd", "#edb3bc", "#edb3bc", "#edb3bc", "#edb3bc", "#edb3bc", "#edb3bd", "#edb3bd", "#edb3bd", "#eeb3bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb4bd", "#eeb3bd", "#eeb3bd", "#eeb3bd", "#edb3bd", "#edb3bd", "#edb3bd", "#edb2bd", "#edb2bd", "#edb2bd", "#edb2bd", "#edb2bd", "#edb2bd", "#edb2bc", "#edb2bc", "#edb2bd", "#edb2bd", "#edb3bc", "#ecb2bc", "#ecb2bc", "#edb4bd", "#eeb6be", "#efb8bf", "#f0bac0", "#f1bcc2", "#f1bcc2", "#f1bcc1", "#f0bbc1", "#f0bbc1", "#f0bbc1", "#f0bbc0", "#f0bbc0", "#f0bbc0", "#f0bbc1", "#f0bbc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc2", "#f1bcc2", "#f1bcc2", "#f1bcc2", "#f1bcc2", "#f1bcc2", "#f1bcc2", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc2", "#f1bcc2", "#f1bcc2", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f0bcc1", "#f1bcc1", "#f1bcc1", "#f1bcc1", "#f0bbc1", "#f0bbc0", "#f0bbc0", "#f0bbc0", "#f0bbc0"], TC=["#edb4bd", "#edb3bd", "#edb3bd", "#edb3bd", "#edb3bd", "#ecb3bc", "#ecb3bc", "#ecb3bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb2bc", "#ecb1bc", "#ecb1bc", "#ecb1bc", "#ecb1bb", "#ebb1bb", "#ecb1bb", "#ecb1bb", "#ecb1bb", "#ebb1bb", "#ebb1bb", "#ebb1bb", "#ecb1bb", "#ebb1bb", "#ebb2bb", "#ebb2bb", "#eaafba", "#e9adb8", "#e8aab6", "#e7a8b3", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b2", "#e6a5b2", "#e7a5b2", "#e7a6b2", "#e7a6b2", "#e7a6b2", "#e7a5b2", "#e6a5b2", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a4b1", "#e6a4b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a4b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e6a5b1", "#e8a9b4", "#eaadb8", "#ecb1ba", "#eeb5bd", "#f0b8c0", "#efb8c0", "#efb8bf", "#efb8bf", "#efb7bf", "#efb7bf", "#efb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb6be", "#eeb6be", "#eeb6be", "#eeb6be", "#eeb6be", "#eeb6be", "#eeb6be", "#eeb6bf", "#eeb6bf", "#eeb6bf", "#eeb6bf", "#eeb6bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7bf", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#efb7be", "#efb7be", "#efb7be", "#efb7be", "#efb8bf", "#efb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb8be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be", "#eeb7be"];
+  var N=FRAMES.length;
+  var clamp=function(x,a,b){a=a===undefined?0:a;b=b===undefined?1:b;return Math.min(b,Math.max(a,x));};
+  var seg=function(p,a,b){return clamp((p-a)/(b-a));};
+  var lerp=function(a,b,t){return a+(b-a)*t;};
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll progress -> video frame index (slow where the story needs to dwell) */
+  var MAP=[[0,0],[.10,8],[.34,40],[.40,44],[.55,57],[.74,90],[.80,100],[.86,111],[1,N-1]];
+  function frameAt(p){
+    for(var i=1;i<MAP.length;i++){
+      if(p<=MAP[i][0]){var a=MAP[i-1],b=MAP[i];return lerp(a[1],b[1],(p-a[0])/(b[0]-a[0]));}
+    }
+    return N-1;
+  }
+
+  /* ---------- canvas ---------- */
+  var stage=document.getElementById('stage'),cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+  var imgs=new Array(N),loaded=0,mobile=false,dpr=1,size=0,baseFb=0;
+  function layout(){
+    var w=stage.clientWidth,h=stage.clientHeight;
+    mobile=w<=760||w/h<.9;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    if(mobile){
+      size=Math.min(w,h*.66);
+      cv.style.left=((w-size)/2)+'px';cv.style.right='auto';cv.style.bottom='0';cv.style.top='auto';
+      cv.style.setProperty('--fl','0%');cv.style.setProperty('--ft','28%');baseFb=0;
+    }else{
+      size=Math.min(h,w*.68);
+      var flush=size>=h-1;
+      cv.style.left='auto';cv.style.right='0';cv.style.top=((h-size)/2)+'px';cv.style.bottom='auto';
+      cv.style.setProperty('--fl','16%');
+      cv.style.setProperty('--ft',flush?'0%':'8%');baseFb=flush?0:8;
+    }
+    cv.style.width=size+'px';cv.style.height=size+'px';
+    cv.width=Math.round(size*dpr);cv.height=Math.round(size*dpr);
+    last=-1;
+  }
+  window.addEventListener('resize',layout);
+
+  function near(i){ /* nearest loaded frame */
+    if(imgs[i]&&imgs[i].complete&&imgs[i].naturalWidth)return imgs[i];
+    for(var d=1;d<N;d++){
+      var a=imgs[i-d],b=imgs[i+d];
+      if(a&&a.complete&&a.naturalWidth)return a;
+      if(b&&b.complete&&b.naturalWidth)return b;
+    }
+    return null;
+  }
+  function hex(c){return [parseInt(c.substr(1,2),16),parseInt(c.substr(3,2),16),parseInt(c.substr(5,2),16)];}
+  function mix(arr,f){
+    var i=Math.floor(f),j=Math.min(N-1,i+1),t=f-i,a=hex(arr[i]),b=hex(arr[j]);
+    return 'rgb('+Math.round(lerp(a[0],b[0],t))+','+Math.round(lerp(a[1],b[1],t))+','+Math.round(lerp(a[2],b[2],t))+')';
+  }
+  var last=-1,lastFb=-1;
+  function draw(f){
+    if(Math.abs(f-last)<.01)return;
+    last=f;
+    var i=Math.floor(f),fr=f-i,j=Math.min(N-1,i+1);
+    var a=near(i);if(!a)return;
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.globalAlpha=1;
+    ctx.drawImage(a,0,0,cv.width,cv.height);
+    if(fr>.02&&j!==i){var b=near(j);if(b){ctx.globalAlpha=fr;ctx.drawImage(b,0,0,cv.width,cv.height);ctx.globalAlpha=1;}}
+    stage.style.backgroundColor=mix(mobile?TC:LC,f);
+  }
+
+  /* ---------- copy chapters ---------- */
+  var chaps=[].slice.call(document.querySelectorAll('.chap')).map(function(el){
+    return {el:el,w:el.getAttribute('data-w').split(',').map(Number)};
+  });
+  function renderCopy(p){
+    chaps.forEach(function(c){
+      var w=c.w,i=seg(p,w[0],w[1]),o=seg(p,w[2],w[3]);
+      if(w[0]===0)i=1;
+      var a=i*(1-o);
+      c.el.style.opacity=a;
+      c.el.style.setProperty('--dy',((1-i)*36-o*70)+'px');
+      c.el.style.pointerEvents=a>.5?'auto':'none';
+    });
+  }
+
+  /* ---------- scroll loop ---------- */
+  var track=document.getElementById('track');
+  function maxScroll(){return track.offsetHeight-window.innerHeight;}
+  function target(){var r=track.getBoundingClientRect();return clamp(-r.top/maxScroll());}
+  var cur=target();
+  function loop(){
+    var tg=target();
+    cur=reduce?tg:cur+(tg-cur)*.14;
+    if(Math.abs(tg-cur)<.0002)cur=tg;
+    renderCopy(cur);
+    draw(frameAt(cur));
+    var fb=Math.max(baseFb,seg(cur,.9,1)*38);
+    if(fb!==lastFb){cv.style.setProperty('--fb',fb+'%');lastFb=fb;}
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- preload ---------- */
+  var loader=document.getElementById('loader'),bar=document.getElementById('bar');
+  FRAMES.forEach(function(src,i){
+    var im=new Image();
+    im.onload=function(){
+      loaded++;bar.style.width=(loaded/N*100)+'%';
+      if(loaded===1||i===0)last=-1;
+      if(loaded>=Math.min(N,24))loader.classList.add('off');
+      last=-1;
+    };
+    im.decoding='async';im.src=src;imgs[i]=im;
+  });
+  layout();
+  requestAnimationFrame(loop);
+
+  /* ---------- nav ---------- */
+  function go(v){
+    if(v==='grid'){document.getElementById('grid').scrollIntoView({behavior:reduce?'auto':'smooth'});return;}
+    var top=track.getBoundingClientRect().top+window.scrollY;
+    window.scrollTo({top:top+parseFloat(v)*maxScroll(),behavior:reduce?'auto':'smooth'});
+  }
+  document.addEventListener('click',function(ev){
+    var el=ev.target.closest('[data-go]');
+    if(!el)return;
+    ev.preventDefault();go(el.getAttribute('data-go'));
+  });
+
+  /* ---------- products ---------- */
+  var defs='<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f4cfcc"/><stop offset=".22" stop-color="#fff4ef"/><stop offset=".6" stop-color="#f3d3cf"/><stop offset="1" stop-color="#deaab0"/></linearGradient><linearGradient id="pc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f3dfd4"/><stop offset=".3" stop-color="#fbeee6"/><stop offset=".7" stop-color="#f0d6cc"/><stop offset="1" stop-color="#e5bfb8"/></linearGradient><linearGradient id="pl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a0508"/><stop offset=".2" stop-color="#3a2a34"/><stop offset=".5" stop-color="#150b10"/><stop offset="1" stop-color="#050204"/></linearGradient><linearGradient id="pgold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b88a4a"/><stop offset=".3" stop-color="#f0dbaa"/><stop offset="1" stop-color="#9c7338"/></linearGradient><radialGradient id="plt" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#4a3a44"/><stop offset=".6" stop-color="#1c1218"/><stop offset="1" stop-color="#0a0508"/></radialGradient></defs>';
+  var art={
+    cream:'<svg viewBox="0 0 150 170" aria-hidden="true">'+defs+'<ellipse cx="75" cy="152" rx="46" ry="7" fill="rgba(90,35,80,.18)"/><path d="M26 82V122Q26 138 75 138T124 122V82Z" fill="url(#pg)"/><path d="M33 82V120Q33 131 75 131T117 120V82Z" fill="url(#pc)"/><path d="M26 82V56Q26 46 75 46T124 56V82Q124 92 75 92T26 82Z" fill="url(#pl)"/><ellipse cx="75" cy="56" rx="49" ry="9" fill="url(#plt)"/></svg>',
+    serum:'<svg viewBox="0 0 150 170" aria-hidden="true">'+defs+'<ellipse cx="75" cy="156" rx="30" ry="6" fill="rgba(90,35,80,.18)"/><rect x="48" y="62" width="54" height="92" rx="10" fill="url(#pg)"/><rect x="54" y="92" width="42" height="56" rx="6" fill="#f6d3dc" opacity=".9"/><rect x="62" y="38" width="26" height="28" rx="4" fill="url(#pl)"/><rect x="65" y="14" width="20" height="28" rx="10" fill="#150b10"/><rect x="62" y="60" width="26" height="5" fill="url(#pgold)"/></svg>',
+    balm:'<svg viewBox="0 0 150 170" aria-hidden="true">'+defs+'<ellipse cx="75" cy="144" rx="40" ry="6" fill="rgba(90,35,80,.18)"/><path d="M34 96V120Q34 134 75 134T116 120V96Z" fill="url(#pg)"/><path d="M40 98V118Q40 128 75 128T110 118V98Z" fill="#f2c9c9"/><path d="M34 96V82Q34 74 75 74T116 82V96Q116 104 75 104T34 96Z" fill="url(#pl)"/><ellipse cx="75" cy="82" rx="41" ry="7" fill="url(#plt)"/></svg>',
+    eau:'<svg viewBox="0 0 150 170" aria-hidden="true">'+defs+'<ellipse cx="75" cy="156" rx="36" ry="6" fill="rgba(90,35,80,.18)"/><rect x="40" y="64" width="70" height="88" rx="9" fill="url(#pg)"/><rect x="46" y="86" width="58" height="60" rx="6" fill="#f3b6cc" opacity=".92"/><rect x="62" y="44" width="26" height="22" fill="url(#pgold)"/><rect x="58" y="16" width="34" height="32" rx="5" fill="url(#pl)"/><rect x="52" y="70" width="14" height="70" rx="6" fill="rgba(255,255,255,.35)"/></svg>'
+  };
+  var products=[
+    {n:'Peony Cream',d:'Whipped day cream',p:'$38',a:'cream'},
+    {n:'Dawn Serum',d:'Petal-water serum',p:'$52',a:'serum'},
+    {n:'Petal Balm',d:'Lip and cheek balm',p:'$24',a:'balm'},
+    {n:'Bloom Eau',d:'Fresh peony parfum',p:'$68',a:'eau'}
+  ];
+  var grid=document.getElementById('products');
+  products.forEach(function(x){
+    var c=document.createElement('article');c.className='card';
+    c.innerHTML=art[x.a]+'<h3>'+x.n+'</h3><p class="d">'+x.d+'</p><p class="pr">'+x.p+'</p><button class="pill">Add to bag</button>';
+    grid.appendChild(c);
+  });
+  var count=0,cartN=document.getElementById('cartN'),cartB=document.getElementById('cart');
+  grid.addEventListener('click',function(ev){
+    var b=ev.target.closest('.pill');if(!b)return;
+    count++;cartN.textContent=count;cartN.classList.add('on');
+    cartB.setAttribute('aria-label','Bag, '+count+(count===1?' item':' items'));
+    b.textContent='Added to bag';b.classList.add('done');
+    setTimeout(function(){b.textContent='Add to bag';b.classList.remove('done');},1400);
+  });
+})();
+</script>
+</body>
+</html>
